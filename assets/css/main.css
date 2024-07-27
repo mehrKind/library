@@ -1,0 +1,211 @@
+@font-face {
+    font-family: yekanMed;
+    src: url("../fonts/IRANYekanMediumFaNum.ttf");
+}
+
+@font-face {
+    font-family: yekanBold;
+    src: url("../fonts/IRANYekanBoldFaNum.ttf");
+}
+
+@font-face {
+    font-family: yekanExBold;
+    src: url("../fonts/IRANYekanExtraBoldFaNum.ttf");
+}
+
+@font-face {
+    font-family: yekanBlack;
+    src: url("../fonts/IRANYekanBlackFaNum.ttf");
+}
+
+@font-face {
+    font-family: yekanReg;
+    src: url("../fonts/IRANYekanRegularFaNum.ttf");
+}
+
+:root {
+    --bs-blue: #0d6efd;
+    --bs-indigo: #6610f2;
+    --bs-purple: #6f42c1;
+    --bs-pink: #d63384;
+    --bs-red: #dc3545;
+    --bs-orange: #fd7e14;
+    --bs-yellow: #ffc107;
+    --bs-green: #198754;
+    --bs-teal: #20c997;
+    --bs-cyan: #0dcaf0;
+    --bs-white: #fff;
+    --bs-gray: #6c757d;
+    --bs-gray-dark: #343a40;
+    --bs-primary: #0d6efd;
+    --bs-secondary: #6c757d;
+    --bs-success: #198754;
+    --bs-info: #0dcaf0;
+    --bs-warning: #ffc107;
+    --bs-danger: #dc3545;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f1f1f1;
+    font-family: yekanMed;
+    direction: rtl;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+header {
+    background: #f39c12;
+}
+
+.yekanMed {
+    font-family: yekanMed;
+}
+
+.yekanBold {
+    font-family: yekanBold;
+}
+
+.yekanBlack {
+    font-family: yekanBlack;
+}
+
+.yekanReg {
+    font-family: yekanReg;
+}
+
+.yekanExBold {
+    font-family: yekanExBold;
+}
+
+/* left links */
+.left-side {
+    width: 100%;
+}
+
+.left-side ul li img {
+    width: 20px;
+    margin-left: 15px;
+}
+
+.left-side ul li p {
+    margin: 0;
+    padding: 0;
+}
+
+.left-side ul li {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+
+.left-side ul li:hover {
+    background-color: #35434a;
+    border-radius: 8px;
+}
+
+.left-side ul li.active {
+    background-color: #35434a;
+    border-radius: 8px;
+    border-right: 5px solid #f39c12;
+}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background: #fff;
+    height: 40px;
+}
+
+.card-book {
+    background-color: #00c0ef;
+    border-radius: 5px;
+    padding: 30px;
+    position: relative;
+
+}
+
+.card-author {
+    background-color: #00a65a;
+    border-radius: 5px;
+    padding: 30px;
+    position: relative;
+
+}
+
+.card-course {
+    background-color: #f39c12;
+    border-radius: 5px;
+    padding: 30px;
+    position: relative;
+
+}
+
+.card-article {
+    background-color: #dd4b39;
+    border-radius: 5px;
+    padding: 30px;
+    position: relative;
+
+}
+
+.card-details {
+    position: absolute;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    width: 100%;
+    right: 0;
+    padding: 3px;
+}
+
+.card-details a {
+    margin: 0;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.666);
+}
+
+.card-details img {
+    width: 20px;
+    margin-right: 8px;
+}

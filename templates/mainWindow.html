@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+
+<body style="height: 100vh;">
+    <header>
+        <nav>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 p-2" style="background-color: #e08e0b;">
+                        <div class="left-side-nav text-center text-white">
+                            <h4>کتابخانه <span class="yekanExBold">مهربان</span></h4>
+                        </div>
+                    </div>
+                    <div class="col-md-10 p-2">
+                        <div class="right-side-nav row">
+                            <!-- <button class="openMenuBtn" type="button">menu</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="mainApp-div container-fluid">
+        <div class="row">
+            <div class="col-md-2 text-white" style="background-color: #222d32; height: 93vh;">
+                <div class="left-side mt-2">
+                    <ul class="tab">
+                        <li class="tablinks active" onclick="openTab(event, 'dashboardTab')">
+                            <img src="../assets/images/fa--dashboard.svg" alt="">
+                            <p>داشبورد</p>
+                        </li>
+                        <li class="tablinks" onclick="openTab(event, 'booksTab')">
+                            <img src="../assets/images/fa--book.svg" alt="">
+                            <p>کتاب ها</p>
+                        </li>
+                        <li class="tablinks" onclick="openTab(event, 'articleTab')">
+                            <img src="../assets/images/material-symbols--article-sharp.svg" alt="">
+                            <p>مقالات</p>
+                        </li>
+                        <li class="tablinks" onclick="openTab(event, 'noteTab')">
+                            <img src="../assets/images/ic--sharp-note-add.svg" alt="">
+                            <p>نوشته ها</p>
+                        </li>
+                        <li class="tablinks" onclick="openTab(event, 'courseTab')">
+                            <img src="../assets/images/fluent--hat-graduation-20-filled.svg" alt="">
+                            <p>دوره ها</p>
+                        </li>
+                        <li class="tablinks" onclick="openTab(event, 'likeTab')">
+                            <img src="../assets/images/subway--like.svg" alt="">
+                            <p>لایک</p>
+                        </li>
+                        <li class="tablinks" onclick="openTab(event, 'bookmarkTab')">
+                            <img src="../assets/images/ic--baseline-bookmark.svg" alt="">
+                            <p>ذخیره شده</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10" style="position: relative;">
+                <div class="right-side mb-5">
+                    <div class="tabcontent" id="dashboardTab" style="display: block;">
+                        <div class="container mt-3">
+                            <div class="title">
+                                <h2 class="yekanExBold">داشبورد</h2>
+                            </div>
+                            <div class="row mt-5 text-center">
+                                <!-- books -->
+                                <div class="col-md-3">
+                                    <div class="card-book">
+                                        <div class="row">
+                                            <div class="col-md-6 text-white" style="text-align: right;">
+                                                <h1 class="yekanExBold" id="book_counter" style="font-size:3rem;"></h1>
+                                                <p class="">کتاب</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img src="../assets/images/book-big.svg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="card-details tab"
+                                            style="display: flex; background-color: #00acd7; cursor: pointer;">
+                                            <a class="tablinks" onclick="openTab(event, 'booksTab')">اطلاعات بیشتر</a>
+                                            <img src="../assets/images/more-info.svg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- autors -->
+                                <div class="col-md-3">
+                                    <div class="card-author">
+                                        <div class="row">
+                                            <div class="col-md-6 text-white" style="text-align: right;">
+                                                <h1 class="yekanExBold" style="font-size:3rem;">0</h1>
+                                                <p class="">نویسندگان</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img src="../assets/images/people-card.svg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="card-details" style="display: flex; background-color: #009551;">
+                                            <a href="#">اطلاعات بیشتر</a>
+                                            <img src="../assets/images/more-info.svg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- courses -->
+                                <div class="col-md-3">
+                                    <div class="card-course">
+                                        <div class="row">
+                                            <div class="col-md-6 text-white" style="text-align: right;">
+                                                <h1 class="yekanExBold" style="font-size:3rem;">0</h1>
+                                                <p class="">دوره آموزشی</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img src="../assets/images/course-big.svg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="card-details" style="display: flex; background-color: #da8c10;">
+                                            <a href="#">اطلاعات بیشتر</a>
+                                            <img src="../assets/images/more-info.svg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- article -->
+                                <div class="col-md-3">
+                                    <div class="card-article">
+                                        <div class="row">
+                                            <div class="col-md-6 text-white" style="text-align: right;">
+                                                <h1 class="yekanExBold" style="font-size:3rem;">0</h1>
+                                                <p class="">مقاله</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img src="../assets/images/article-big.svg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="card-details" style="display: flex; background-color: #c64333;">
+                                            <a href="#">اطلاعات بیشتر</a>
+                                            <img src="../assets/images/more-info.svg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- second line -->
+                            <div class="dashboard-second-line mt-4">
+                                <div class="row">
+                                    <!-- notepadd -->
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <div class="container shadow">
+                                                <div class="row">
+                                                    <div class="col-md-5"
+                                                        style="background-color: #00c0ef; display: flex; justify-content: center;">
+                                                        <img src="../assets/images/ic--sharp-note-add.svg"
+                                                            style="width: 65px;">
+                                                    </div>
+                                                    <div class="col-md-7" style="background-color: #ffffff;">
+                                                        <h5 class="yekanReg">یادداشت ها</h5>
+                                                        <p class="yekanExBold" style="font-size: 1.6rem;">0</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- like -->
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <div class="container shadow">
+                                                <div class="row">
+                                                    <div class="col-md-5"
+                                                        style="background-color: #dd4b39; display: flex; justify-content: center;">
+                                                        <img src="../assets/images/subway--like.svg"
+                                                            style="width: 65px;">
+                                                    </div>
+                                                    <div class="col-md-7" style="background-color: #ffffff;">
+                                                        <h5 class="yekanReg">لایک ها</h5>
+                                                        <p class="yekanExBold" style="font-size: 1.6rem;">0</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- saved post -->
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <div class="container shadow">
+                                                <div class="row">
+                                                    <div class="col-md-5"
+                                                        style="background-color: #00a65a; display: flex; justify-content: center;">
+                                                        <img src="../assets/images/ic--baseline-bookmark.svg"
+                                                            style="width: 65px;">
+                                                    </div>
+                                                    <div class="col-md-7" style="background-color: #ffffff;">
+                                                        <h5 class="yekanReg">ذخیره شده ها</h5>
+                                                        <p class="yekanExBold" style="font-size: 1.6rem;">0</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- date and time -->
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <div class="container shadow">
+                                                <div class="row">
+                                                    <div class="col-md-5"
+                                                        style="background-color: #f39c12; display: flex; justify-content: center;">
+                                                        <img src="../assets/images/ic--twotone-date-range.svg"
+                                                            style="width: 65px;">
+                                                    </div>
+                                                    <div class="col-md-7" style="background-color: #ffffff;">
+                                                        <h5 class="yekanReg">تاریخ امروز</h5>
+                                                        <p class="yekanExBold" style="font-size: 1.3rem;"
+                                                            id="todayDashboard"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tabcontent mt-4" id="booksTab">
+                        <div class="book-title mb-4">
+                            <h2 class="yekanExBold">همه کتاب ها</h2>
+                        </div>
+                        <hr>
+                        <div class="search-books-div">
+                            <h3 class="yekanBold">جستجو</h3>
+                            <div class="searchBox my-3 row">
+                                <div class="col-md-2">
+                                    <p>جستجو بر اساس:</p>
+                                </div>
+                                <div class="col-md-5">
+                                    <form style="display: flex;">
+                                        <div class="form-group">
+                                            <select id="inputState" class="form-control">
+                                                <option>انتخاب کنید</option>
+                                                <option>نام کتاب</option>
+                                                <option>نویسنده</option>
+                                                <option>ناشر</option>
+                                                <option>نوع کتاب</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mx-3">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="addBookBtn-div">
+                                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#modalId">اضافه کردن سریع</button>
+                                        </div>
+                                        <!-- Modal Body -->
+                                        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                                        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static"
+                                            data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered"
+                                                role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                        <h5 class="modal-title" id="modalTitleId">
+                                                            اضافه کردن سریع کتاب
+                                                        </h5>
+                                                    </div>
+                                                    <!-- inputs to add books -->
+                                                    <div class="modal-body">
+                                                        <div class="container">
+                                                            <p class="text-danger">* کتاب های با چند نویسنده را با - جدا
+                                                                کنید</p>
+                                                            <form>
+                                                                <div class="mb-3 row">
+                                                                    <label for="bookName"
+                                                                        class="col-4 col-form-label">نام کتاب</label>
+                                                                    <div class="col-8">
+                                                                        <input type="text" class="form-control"
+                                                                            name="bookName" id="bookName"
+                                                                            placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3 row">
+                                                                    <label for="author"
+                                                                        class="col-4 col-form-label">نویسندگان</label>
+                                                                    <div class="col-8">
+                                                                        <input type="text" class="form-control"
+                                                                            name="author" id="author" placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3 row">
+                                                                    <label for="bookType"
+                                                                        class="col-4 col-form-label">نوع کتاب</label>
+                                                                    <div class="col-8">
+                                                                        <input type="text" class="form-control"
+                                                                            name="bookType" id="bookType"
+                                                                            placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3 row">
+                                                                    <label for="publishers"
+                                                                        class="col-4 col-form-label">ناشر</label>
+                                                                    <div class="col-8">
+                                                                        <input type="text" class="form-control"
+                                                                            name="publishers" id="publishers"
+                                                                            placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3 row">
+                                                                    <label for="publishCount"
+                                                                        class="col-4 col-form-label">نوبت چاپ</label>
+                                                                    <div class="col-8">
+                                                                        <input type="text" class="form-control"
+                                                                            name="publishCount" id="publishCount"
+                                                                            placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3 row">
+                                                                    <label for="publishYear"
+                                                                        class="col-4 col-form-label">سال انتشار</label>
+                                                                    <div class="col-8">
+                                                                        <input type="text" class="form-control"
+                                                                            name="publishYear" id="publishYear"
+                                                                            placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3 row">
+                                                                    <label for="price"
+                                                                        class="col-4 col-form-label">قیمت</label>
+                                                                    <div class="col-8">
+                                                                        <input type="text" class="form-control"
+                                                                            name="price" id="price">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3 row">
+                                                                    <label for="content"
+                                                                        class="col-4 col-form-label">توضیحات</label>
+                                                                    <div class="col-8">
+                                                                        <textarea class="form-control" name="content"
+                                                                            id="content"
+                                                                            placeholder="توضیحات"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-outline-danger"
+                                                            data-bs-dismiss="modal">
+                                                            لغو
+                                                        </button>
+                                                        <button type="button" class="btn btn-warning">ذخیره</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-5"></div>
+                            </div>
+                        </div>
+                        <div class="books-table">
+                            <table class="table table-hover table-bordered table-striped">
+                                <thead>
+                                    <tr id="bookHeader"></tr>
+                                </thead>
+                                <tbody id="bookBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tabcontent" id="articleTab">articleTab</div>
+                    <!-- ! Note Part -->
+                    <div class="tabcontent" id="noteTab">
+                        <!-- top nav -->
+                        <div class="container bg-white shadow-sm rounded-2 my-3 border-secondary-subtle p-3">
+                            <div class="row">
+                                <!-- new text button -->
+                                <div class="col-md-6" style="display: flex; gap:15px;">
+                                    <!-- new text -->
+                                    <button class="btn btn-outline-primary" style="display: flex; align-items: center;"
+                                        type="button"
+                                        id="cleareNoteBtn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em"
+                                            viewBox="0 0 24 24">
+                                            <path fill="unset"
+                                                d="M14 2H4v20h16V8zm2 14h-3v3h-2v-3H8v-2h3v-3h2v3h3zm-3-7V3.5L18.5 9z" />
+                                        </svg>
+                                        <p style="padding: 0; margin: 0; margin-right: 5px;">نوشته جدید</p>
+                                    </button>
+                                    <!-- share -->
+                                    <button class="btn btn-outline-indigo" style="display: flex; align-items: center;"
+                                        type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                            viewBox="0 0 24 24">
+                                            <path fill="#000"
+                                                d="M18 22q-1.25 0-2.125-.875T15 19q0-.175.025-.363t.075-.337l-7.05-4.1q-.425.375-.95.588T6 15q-1.25 0-2.125-.875T3 12t.875-2.125T6 9q.575 0 1.1.213t.95.587l7.05-4.1q-.05-.15-.075-.337T15 5q0-1.25.875-2.125T18 2t2.125.875T21 5t-.875 2.125T18 8q-.575 0-1.1-.212t-.95-.588L8.9 11.3q.05.15.075.338T9 12t-.025.363t-.075.337l7.05 4.1q.425-.375.95-.587T18 16q1.25 0 2.125.875T21 19t-.875 2.125T18 22" />
+                                        </svg>
+                                        <p style="padding: 0; margin: 0; margin-right: 5px;">اشتراک گذاری</p>
+                                    </button>
+                                </div>
+                                <div class="col-md-6" style="text-align: left;">
+                                    <!-- ! open folder button -->
+                                    <button class="btn btn-outline-danger" type="button" id="openNoteBtn">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="1.35em" height="1em"
+                                            viewBox="0 0 1888 1408">
+                                            <path fill="#000"
+                                                d="M1879 824q0 31-31 66l-336 396q-43 51-120.5 86.5T1248 1408H160q-34 0-60.5-13T73 1352q0-31 31-66l336-396q43-51 120.5-86.5T704 768h1088q34 0 60.5 13t26.5 43m-343-344v160H704q-94 0-197 47.5T343 807L6 1203l-5 6q0-4-.5-12.5T0 1184V224q0-92 66-158T224 0h320q92 0 158 66t66 158v32h544q92 0 158 66t66 158" />
+                                            </svg></button>
+                                    <!-- ! save button -->
+                                    <button class="btn btn-outline-success" type="button" id="saveNoteBtn"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em"
+                                            viewBox="0 0 24 24">
+                                            <path fill="#000"
+                                                d="M17 3H3v18h18V7zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3s3 1.34 3 3s-1.34 3-3 3m3-10H5V5h10z" />
+                                        </svg></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="noteContent-div">
+                            <textarea autofocus class="border-0 shadow-sm p-3 rounded-2" name="" id="noteArea" style="width: 100%; height: 500px; resize: none; outline: none; background-color: #fffefc;" ></textarea>
+                        </div>
+                    </div>
+                    <div class="tabcontent" id="likeTab">likeTab</div>
+                    <div class="tabcontent" id="bookmarkTab">bookmarkTab</div>
+                    <div class="tabcontent" id="courseTab">courseTab</div>
+                </div>
+
+                <div class="footer text-center">
+                    <p class="text-secondary">version 1.0.0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+</body>
+
+</html>
