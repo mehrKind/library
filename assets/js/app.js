@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require("path")
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, shell } = require('electron');
 
 // open tabs in the main page
 function openTab(evt, tabName) {
@@ -153,3 +153,27 @@ const textAreaInput = document.getElementById('noteArea');
 clearBtn.addEventListener('click', () => {
     textAreaInput.value = ''; // Set the value of the textarea to an empty string
 });
+
+// share text to telegram
+document.getElementById('shareNoteBtn').addEventListener('click', () => {
+    const textToShare = document.getElementById('noteArea').value;
+    const telegramBaseUrl = 'https://t.me/share/url';
+    const encodedText = encodeURIComponent(textToShare);
+    const telegramShareUrl = `${telegramBaseUrl}?text=${encodedText}`;
+
+    shell.openExternal(telegramShareUrl);
+});
+
+// see the count of the text mehr file
+function updateMehrFileCount() {
+    ipcRenderer.send('count-mehr-files');
+}
+
+ipcRenderer.on('mehr-file-count', (event, count) => {
+    document.getElementById('noteCount').textContent = count;
+});
+
+document.getElementById('dashboardID').addEventListener('click', updateMehrFileCount);
+
+// Initial count on page load
+updateMehrFileCount();

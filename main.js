@@ -128,47 +128,103 @@ ipcMain.on('form-data', (event, formData) => {
 
 // save ntoe
 ipcMain.on('save-text-file', (event, textToSave) => {
-    dialog.showSaveDialog({
-        title: 'ذخیره کردن نوشته',
-        defaultPath: 'noteFile.mehr',
-        buttonLabel: 'save',
-        filters: [{ name: 'Text Files', extensions: ['mehr'] }]
-    }).then(result => {
-        if (!result.canceled) {
-            fs.writeFile(result.filePath, textToSave, 'utf-8', (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
+    const defaultDirectory = 'C:\\lib_mehr';
+    const defaultFileName = 'noteFile.mehr';
+
+    // Ensure the directory exists, if not create it
+    fs.mkdir(defaultDirectory, { recursive: true }, (err) => {
+        if (err) {
+            console.error('Error creating directory:', err);
+            return;
         }
-    }).catch(err => {
-        console.error(err);
+
+        // Show save dialog with the default path set to the specified directory
+        dialog.showSaveDialog({
+            title: 'ذخیره کردن نوشته',
+            defaultPath: path.join(defaultDirectory, defaultFileName),
+            buttonLabel: 'save',
+            filters: [{ name: 'Text Files', extensions: ['mehr'] }]
+        }).then(result => {
+            if (!result.canceled) {
+                const filePath = result.filePath;
+                // Write the file
+                fs.writeFile(filePath, textToSave, 'utf-8', (err) => {
+                    if (err) {
+                        console.error('Error saving file:', err);
+                    } else {
+                        console.log('File saved successfully!');
+                    }
+                });
+            }
+        }).catch(err => {
+            console.error('Error showing save dialog:', err);
+        });
     });
 });
 
-
-// open notFile
+// open file
 ipcMain.on('open-text-file', (event) => {
-    dialog.showOpenDialog({
-        title: 'باز کردن نوشته',
-        buttonLabel: 'Open',
-        filters: [{ name: 'Text Files', extensions: ['mehr'] }],
-        properties: ['openFile']
-    }).then(result => {
-        if (!result.canceled) {
-            const filePath = result.filePaths[0];
-            fs.readFile(filePath, 'utf-8', (err, data) => {
-                if (err) {
-                    console.error(err);
-                } else {
-                    event.reply('file-content', data);
-                }
-            });
+    const defaultDirectory = 'C:\\lib_mehr';
+
+    // Ensure the directory exists, if not create it
+    fs.mkdir(defaultDirectory, { recursive: true }, (err) => {
+        if (err) {
+            console.error('Error creating directory:', err);
+            return;
         }
-    }).catch(err => {
-        console.error(err);
+
+        // Show open dialog with the default path set to the specified directory
+        dialog.showOpenDialog({
+            title: 'باز کردن نوشته',
+            defaultPath: defaultDirectory,
+            buttonLabel: 'Open',
+            filters: [{ name: 'Text Files', extensions: ['mehr'] }],
+            properties: ['openFile']
+        }).then(result => {
+            if (!result.canceled) {
+                const filePath = result.filePaths[0];
+                // Read the file
+                fs.readFile(filePath, 'utf-8', (err, data) => {
+                    if (err) {
+                        console.error('Error reading file:', err);
+                    } else {
+                        event.reply('file-content', data);
+                    }
+                });
+            }
+        }).catch(err => {
+            console.error('Error showing open dialog:', err);
+        });
     });
 });
+
+// see the count of the *.mehr file in the dir
+const defaultDirectory = 'C:\\lib_mehr';
+
+ipcMain.on('count-mehr-files', (event) => {
+    // Ensure the directory exists
+    fs.mkdir(defaultDirectory, { recursive: true }, (err) => {
+        if (err) {
+            console.error('Error creating directory:', err);
+            return;
+        }
+
+        // Read the directory
+        fs.readdir(defaultDirectory, (err, files) => {
+            if (err) {
+                console.error('Error reading directory:', err);
+                return;
+            }
+
+            // Count the .mehr files
+            const mehrFileCount = files.filter(file => path.extname(file) === '.mehr').length;
+
+            // Send the count back to the renderer process
+            event.reply('mehr-file-count', mehrFileCount);
+        });
+    });
+}); 
+
 
 // Add developer tools item if not in production
 if (process.env.NODE_ENV !== 'production') {

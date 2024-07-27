@@ -31,7 +31,7 @@
             <div class="col-md-2 text-white" style="background-color: #222d32; height: 93vh;">
                 <div class="left-side mt-2">
                     <ul class="tab">
-                        <li class="tablinks active" onclick="openTab(event, 'dashboardTab')">
+                        <li class="tablinks active" onclick="openTab(event, 'dashboardTab')" id="dashboardID">
                             <img src="../assets/images/fa--dashboard.svg" alt="">
                             <p>داشبورد</p>
                         </li>
@@ -160,7 +160,7 @@
                                                     </div>
                                                     <div class="col-md-7" style="background-color: #ffffff;">
                                                         <h5 class="yekanReg">یادداشت ها</h5>
-                                                        <p class="yekanExBold" style="font-size: 1.6rem;">0</p>
+                                                        <p class="yekanExBold" style="font-size: 1.6rem;" id="noteCount">0</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -395,7 +395,8 @@
                                     </button>
                                     <!-- share -->
                                     <button class="btn btn-outline-indigo" style="display: flex; align-items: center;"
-                                        type="button">
+                                        type="button"
+                                        id="shareNoteBtn">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                                             viewBox="0 0 24 24">
                                             <path fill="#000"
