@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require("path")
-const { ipcRenderer, shell } = require('electron');
+const {
+    ipcRenderer,
+    shell
+} = require('electron');
 
 // open tabs in the main page
 function openTab(evt, tabName) {
@@ -44,92 +47,24 @@ const myModal = new bootstrap.Modal(
     options,
 );
 
-// get data from the lib data.json file
-fetch("./library_data.json")
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-    })
-    .then(data => {
-        display_books(data);
-        const book_counter = document.getElementById("book_counter");
-        book_counter.innerHTML = data.length;
 
-    })
-    .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-    });
+// save books data to the json file
+document.getElementById('saveBookButton').addEventListener('click', function () {
+    // Get form data here and call the updateJsonData function
+    const formData = {
+        bookName: document.getElementById('bookName').value,
+        author: document.getElementById('author').value,
+        bookType: document.getElementById('bookType').value,
+        publishers: document.getElementById('publishers').value,
+        publishCount: document.getElementById('publishCount').value,
+        publishYear: document.getElementById('publishYear').value,
+        price: document.getElementById('price').value,
+        content: document.getElementById('content').value
+    };
 
-
-function display_books(data) {
-    const tableHeader = document.getElementById("bookHeader");
-    const tableBody = document.getElementById("bookBody");
-    
-    
-    // Clear previous content
-    tableHeader.innerHTML = '';
-    tableBody.innerHTML = '';
-
-    if (data.length === 0) {
-        console.error('No data found');
-        return;
-    }
-    
-    // create table header
-    const headers = Object.keys(data[0]).filter(header => (header !== 'content') && (header !== 'bookCount'));
-    
-
-    // headers.forEach(header => {
-    //     const th = document.createElement('th');
-    //     th.textContent = header;
-    //     tableHeader.appendChild(th);
-    // });
-
-    // Create table rows
-    data.forEach(row => {
-        const tr = document.createElement('tr');
-        headers.forEach(header => {
-            const td = document.createElement('td');
-            td.textContent = row[header];
-            tr.appendChild(td);
-        });
-        tableBody.appendChild(tr);
-    });
-}
-
-// Function to update JSON data with form values
-const updateJsonData = (formData) => {
-    const filePath = path.join(__dirname, 'data.json');
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-
-        const jsonData = JSON.parse(data);
-
-        const maxId = jsonData.reduce((max, entry) => (entry.id > max ? entry.id : max), 0);
-        const newId = maxId + 1;
-
-        const newFormData = {
-            id: newId,
-            bookName: formData.bookName,
-            // Add other form fields here
-        };
-
-        jsonData.push(newFormData);
-
-        fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            console.log('Data updated successfully!');
-        });
-    });
-};
+    // Call the updateJsonData function with the form data
+    updateJsonData(formData);
+});
 
 // write the note text
 document.getElementById('saveNoteBtn').addEventListener('click', () => {
@@ -177,3 +112,41 @@ document.getElementById('dashboardID').addEventListener('click', updateMehrFileC
 
 // Initial count on page load
 updateMehrFileCount();
+
+
+//! application database
+// Load all books
+ipcRenderer.send('show-all-books');
+
+ipcRenderer.on('show-all-books-reply', (event, response) => {
+    if (response.success) {
+        const books = response.books;
+        const bookHeader = document.getElementById('bookHeader');
+        const bookBody = document.getElementById('bookBody');
+
+        // Clear existing content
+        bookHeader.innerHTML = '';
+        bookBody.innerHTML = '';
+
+        // Set table headers
+        const headers = Object.keys(books[0]);
+        headers.forEach(header => {
+            const th = document.createElement('th');
+            th.textContent = header;
+            bookHeader.appendChild(th);
+        });
+
+        // Populate table rows
+        books.forEach(book => {
+            const tr = document.createElement('tr');
+            headers.forEach(header => {
+                const td = document.createElement('td');
+                td.textContent = book[header];
+                tr.appendChild(td);
+            });
+            bookBody.appendChild(tr);
+        });
+    } else {
+        console.error('Failed to load books:', response.message);
+    }
+});

@@ -2,15 +2,23 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
+const sqlite3 = require('sqlite3');
 
-const {app, BrowserWindow, Notification, ipcMain, dialog} = electron;
+const {
+    app,
+    BrowserWindow,
+    Notification,
+    ipcMain,
+    dialog
+} = electron;
+let db = new sqlite3.Database('database.db');
 
 // process.env.NODE_ENV = 'production';
 
 let mainWindow;
 
 // main window
-app.on('ready', ()=>{
+app.on('ready', () => {
     // app config
     mainWindow = new BrowserWindow({
         webPreferences: {
@@ -21,6 +29,16 @@ app.on('ready', ()=>{
         show: false,
         icon: path.join(__dirname, 'assets/icon', 'icon.ico')
     });
+
+    // mainWindow.webContents.on('did-finish-load', () => {
+    //     db.all("SELECT id, author FROM books", (err, rows) => {
+    //         if (err) {
+    //             console.error(err.message);
+    //             return;
+    //         }
+    //         mainWindow.webContents.send('people-data', rows);
+    //     });
+    // });
     // max the width and height
     mainWindow.maximize();
     // show the page after getting maximoze
@@ -33,7 +51,7 @@ app.on('ready', ()=>{
     }));
 
     // close app
-    mainWindow.on("closed", ()=>{
+    mainWindow.on("closed", () => {
         app.quit();
     });
 
@@ -41,17 +59,18 @@ app.on('ready', ()=>{
     const mainMenu = electron.Menu.buildFromTemplate(mainMenuTemplate);
     electron.Menu.setApplicationMenu(mainMenu);
 
+
+
+
 })
 
 // create top menu
-const mainMenuTemplate = [
-    {
+const mainMenuTemplate = [{
         label: "File",
-        submenu: [
-            {
+        submenu: [{
                 label: "Add Book",
                 accelerator: "F1",
-                click(){
+                click() {
                     console.log('====================================');
                     console.log("add book");
                     console.log('====================================');
@@ -60,19 +79,18 @@ const mainMenuTemplate = [
             {
                 label: "Exit",
                 accelerator: process.platform == "darwin" ? "Command+Q" : "Ctrl+Q",
-                click(){
+                click() {
                     app.quit();
                 }
             }
         ]
     },
     {
-        label : "view",
-        submenu : [
-            {
-                label : "Full Screen",
+        label: "view",
+        submenu: [{
+                label: "Full Screen",
                 accelerator: "F11",
-                click(){
+                click() {
                     mainWindow.maximize();
                 }
             },
@@ -82,17 +100,16 @@ const mainMenuTemplate = [
         ]
     },
     {
-        label : "Help",
-        submenu : [
-            {
-                label : "Help",
-                click(){
+        label: "Help",
+        submenu: [{
+                label: "Help",
+                click() {
 
                 }
             },
             {
-                label : "Contact Us",
-                click(){
+                label: "Contact Us",
+                click() {
                     notif = new Notification({
                         title: "تماس با ما",
                         body: "برای ارتباط با ما، با شماره همراه 09224850196 تماس حاصل کنید"
@@ -102,7 +119,7 @@ const mainMenuTemplate = [
             },
             {
                 label: "Developer",
-                click(){
+                click() {
                     notif = new Notification({
                         title: "توسعه دهنده",
                         body: "برای ارتباط با توسعه دهنده این اپلیکیشن با شماره 09224850196 تماس بگیرید. علیرضا مهربان"
@@ -132,7 +149,9 @@ ipcMain.on('save-text-file', (event, textToSave) => {
     const defaultFileName = 'noteFile.mehr';
 
     // Ensure the directory exists, if not create it
-    fs.mkdir(defaultDirectory, { recursive: true }, (err) => {
+    fs.mkdir(defaultDirectory, {
+        recursive: true
+    }, (err) => {
         if (err) {
             console.error('Error creating directory:', err);
             return;
@@ -143,7 +162,10 @@ ipcMain.on('save-text-file', (event, textToSave) => {
             title: 'ذخیره کردن نوشته',
             defaultPath: path.join(defaultDirectory, defaultFileName),
             buttonLabel: 'save',
-            filters: [{ name: 'Text Files', extensions: ['mehr'] }]
+            filters: [{
+                name: 'Text Files',
+                extensions: ['mehr']
+            }]
         }).then(result => {
             if (!result.canceled) {
                 const filePath = result.filePath;
@@ -167,7 +189,9 @@ ipcMain.on('open-text-file', (event) => {
     const defaultDirectory = 'C:\\lib_mehr';
 
     // Ensure the directory exists, if not create it
-    fs.mkdir(defaultDirectory, { recursive: true }, (err) => {
+    fs.mkdir(defaultDirectory, {
+        recursive: true
+    }, (err) => {
         if (err) {
             console.error('Error creating directory:', err);
             return;
@@ -178,7 +202,10 @@ ipcMain.on('open-text-file', (event) => {
             title: 'باز کردن نوشته',
             defaultPath: defaultDirectory,
             buttonLabel: 'Open',
-            filters: [{ name: 'Text Files', extensions: ['mehr'] }],
+            filters: [{
+                name: 'Text Files',
+                extensions: ['mehr']
+            }],
             properties: ['openFile']
         }).then(result => {
             if (!result.canceled) {
@@ -203,7 +230,9 @@ const defaultDirectory = 'C:\\lib_mehr';
 
 ipcMain.on('count-mehr-files', (event) => {
     // Ensure the directory exists
-    fs.mkdir(defaultDirectory, { recursive: true }, (err) => {
+    fs.mkdir(defaultDirectory, {
+        recursive: true
+    }, (err) => {
         if (err) {
             console.error('Error creating directory:', err);
             return;
@@ -223,15 +252,70 @@ ipcMain.on('count-mehr-files', (event) => {
             event.reply('mehr-file-count', mehrFileCount);
         });
     });
-}); 
+});
+
+
+//? database Part
+function showAllBooks(event) {
+    const query = 'SELECT * FROM books';
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            event.reply('show-all-books-reply', {
+                success: false,
+                message: err.message
+            });
+        } else {
+            event.reply('show-all-books-reply', {
+                success: true,
+                books: rows
+            });
+        }
+    });
+}
+
+function addBook(event, bookData) {
+    const query = `
+        INSERT INTO books (bookName, bookCount, author, translator, bookType, publishers, publishCount, publishYear, price, content, colsbanner)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+    const params = [
+        bookData.bookName, bookData.bookCount, bookData.author, bookData.translator, bookData.bookType,
+        bookData.publishers, bookData.publishCount, bookData.publishYear, bookData.price, bookData.content, bookData.colsbanner
+    ];
+    db.run(query, params, function (err) {
+        if (err) {
+            event.reply('add-book-reply', {
+                success: false,
+                message: err.message
+            });
+        } else {
+            event.reply('add-book-reply', {
+                success: true,
+                bookId: this.lastID
+            });
+        }
+    });
+}
+
+// Event listeners for the renderer process
+ipcMain.on('show-all-books', (event) => showAllBooks(event));
+ipcMain.on('add-book', (event, bookData) => addBook(event, bookData));
+
+// close database before exit
+app.on('before-quit', () => {
+    db.close((err) => {
+        if (err) {
+            console.error('Error closing the database:', err.message);
+        }
+    });
+});
 
 
 // Add developer tools item if not in production
 if (process.env.NODE_ENV !== 'production') {
     mainMenuTemplate.push({
         label: 'Developer Tools',
-        submenu: [
-            {
+        submenu: [{
                 label: 'Toggle DevTools',
                 accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
                 click(item, focusedWindow) {

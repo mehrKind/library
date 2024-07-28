@@ -160,7 +160,8 @@
                                                     </div>
                                                     <div class="col-md-7" style="background-color: #ffffff;">
                                                         <h5 class="yekanReg">یادداشت ها</h5>
-                                                        <p class="yekanExBold" style="font-size: 1.6rem;" id="noteCount">0</p>
+                                                        <p class="yekanExBold" style="font-size: 1.6rem;"
+                                                            id="noteCount">0</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -226,6 +227,7 @@
 
                         </div>
                     </div>
+                    <!-- ! show books Tab -->
                     <div class="tabcontent mt-4" id="booksTab">
                         <div class="book-title mb-4">
                             <h2 class="yekanExBold">همه کتاب ها</h2>
@@ -280,7 +282,7 @@
                                                                     <label for="bookName"
                                                                         class="col-4 col-form-label">نام کتاب</label>
                                                                     <div class="col-8">
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="text" class="form-control" required
                                                                             name="bookName" id="bookName"
                                                                             placeholder="">
                                                                     </div>
@@ -355,7 +357,9 @@
                                                             data-bs-dismiss="modal">
                                                             لغو
                                                         </button>
-                                                        <button type="button" class="btn btn-warning">ذخیره</button>
+                                                        <button id="saveBookButton" type="button"
+                                                            class="btn btn-warning" data-bs-dismiss="modal"
+                                                            aria-label="Close">ذخیره</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -365,15 +369,28 @@
                                 <div class="col-md-5"></div>
                             </div>
                         </div>
-                        <div class="books-table">
+                        <!-- <div class="books-table">
                             <table class="table table-hover table-bordered table-striped">
                                 <thead>
                                     <tr id="bookHeader"></tr>
                                 </thead>
                                 <tbody id="bookBody"></tbody>
                             </table>
+                        </div> -->
+
+                        <div id="all-books">
+                            <button id="load-books">Load All Books</button>
+                            <div class="books-table">
+                                <table class="table table-hover table-bordered table-striped">
+                                    <thead>
+                                        <tr id="bookHeader"></tr>
+                                    </thead>
+                                    <tbody id="bookBody"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
+                    <!-- ! article part -->
                     <div class="tabcontent" id="articleTab">articleTab</div>
                     <!-- ! Note Part -->
                     <div class="tabcontent" id="noteTab">
@@ -384,8 +401,7 @@
                                 <div class="col-md-6" style="display: flex; gap:15px;">
                                     <!-- new text -->
                                     <button class="btn btn-outline-primary" style="display: flex; align-items: center;"
-                                        type="button"
-                                        id="cleareNoteBtn">
+                                        type="button" id="cleareNoteBtn">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em"
                                             viewBox="0 0 24 24">
                                             <path fill="unset"
@@ -395,8 +411,7 @@
                                     </button>
                                     <!-- share -->
                                     <button class="btn btn-outline-indigo" style="display: flex; align-items: center;"
-                                        type="button"
-                                        id="shareNoteBtn">
+                                        type="button" id="shareNoteBtn">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                                             viewBox="0 0 24 24">
                                             <path fill="#000"
@@ -408,12 +423,11 @@
                                 <div class="col-md-6" style="text-align: left;">
                                     <!-- ! open folder button -->
                                     <button class="btn btn-outline-danger" type="button" id="openNoteBtn">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg" width="1.35em" height="1em"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.35em" height="1em"
                                             viewBox="0 0 1888 1408">
                                             <path fill="#000"
                                                 d="M1879 824q0 31-31 66l-336 396q-43 51-120.5 86.5T1248 1408H160q-34 0-60.5-13T73 1352q0-31 31-66l336-396q43-51 120.5-86.5T704 768h1088q34 0 60.5 13t26.5 43m-343-344v160H704q-94 0-197 47.5T343 807L6 1203l-5 6q0-4-.5-12.5T0 1184V224q0-92 66-158T224 0h320q92 0 158 66t66 158v32h544q92 0 158 66t66 158" />
-                                            </svg></button>
+                                        </svg></button>
                                     <!-- ! save button -->
                                     <button class="btn btn-outline-success" type="button" id="saveNoteBtn"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em"
@@ -425,10 +439,24 @@
                             </div>
                         </div>
                         <div class="noteContent-div">
-                            <textarea autofocus class="border-0 shadow-sm p-3 rounded-2" name="" id="noteArea" style="width: 100%; height: 500px; resize: none; outline: none; background-color: #fffefc;" ></textarea>
+                            <textarea placeholder="چیزی بنویسید ..." class="border-0 shadow-sm p-3 rounded-2" name=""
+                                id="noteArea"
+                                style="width: 100%; height: 500px; resize: none; outline: none; background-color: #fffefc;"></textarea>
                         </div>
                     </div>
-                    <div class="tabcontent" id="likeTab">likeTab</div>
+                    <!-- ! like Books -->
+                    <div class="tabcontent" id="likeTab">
+                        <h1>People List</h1>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full Name</th>
+                                </tr>
+                            </thead>
+                            <tbody id="people-table"></tbody>
+                        </table>
+                    </div>
                     <div class="tabcontent" id="bookmarkTab">bookmarkTab</div>
                     <div class="tabcontent" id="courseTab">courseTab</div>
                 </div>
@@ -443,6 +471,7 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/popper.min.js"></script>
     <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/database.js"></script>
 </body>
 
 </html>

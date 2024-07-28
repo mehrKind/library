@@ -10,7 +10,8 @@
     "publishYear": "سال انتشار",
     "price": "قیمت (تومان)",
     "content": "توضیحات"
-}, {
+  },
+  {
     "id": 1,
     "bookName": "پوراندخت",
     "bookCount": null,
@@ -22,7 +23,8 @@
     "publishYear": 1396,
     "price": 40000,
     "content": "ایران در زمان ساسانیان (نخستین پادشاه زن ایران)"
-}, {
+  },
+  {
     "id": 2,
     "bookName": "آذرمیدخت",
     "bookCount": null,
@@ -34,7 +36,8 @@
     "publishYear": 1396,
     "price": 45000,
     "content": "ایران در زمان ساسانیان (آخرین پادشاه زن ایران)"
-}, {
+  },
+  {
     "id": 3,
     "bookName": "آریوبرزن",
     "bookCount": 2,
@@ -46,7 +49,8 @@
     "publishYear": 1396,
     "price": 60000,
     "content": "دلاوری که طعم شکست را به اسکندر چشاند"
-}, {
+  },
+  {
     "id": 4,
     "bookName": "سورنا",
     "bookCount": null,
@@ -58,7 +62,8 @@
     "publishYear": 1395,
     "price": 55000,
     "content": "ایران در زمان اشکانیان (سردار ایرانی که کراسوس را به زانو در آورد)"
-}, {
+  },
+  {
     "id": 5,
     "bookName": "دلیران شوش",
     "bookCount": null,
@@ -70,7 +75,8 @@
     "publishYear": 1396,
     "price": 60000,
     "content": "برگی از تاریخ ایران زمین (شرح جنگها و فتوحات خشایارشا)"
-}, {
+  },
+  {
     "id": 6,
     "bookName": "هفت سردار نامی",
     "bookCount": null,
@@ -82,7 +88,8 @@
     "publishYear": 1394,
     "price": 30000,
     "content": "زندگی داریوش قلب تپنده امپراطوری هخامنشی"
-}, {
+  },
+  {
     "id": 7,
     "bookName": "فرزند سرنوشت",
     "bookCount": null,
@@ -94,7 +101,8 @@
     "publishYear": 1391,
     "price": 55000,
     "content": "زندگی شگفت انگیز کوروش - از طلوع تا همیشه تاریخ"
-}, {
+  },
+  {
     "id": 8,
     "bookName": "عایشه بعد از پیامبر",
     "bookCount": null,
@@ -106,7 +114,8 @@
     "publishYear": 1393,
     "price": 25000,
     "content": null
-}, {
+  },
+  {
     "id": 9,
     "bookName": "تاریخ ایران",
     "bookCount": null,
@@ -118,7 +127,8 @@
     "publishYear": 1395,
     "price": 60000,
     "content": "   حسن پیرنیا - عباس اقبال آشتیانی - علی اصغر طاهری"
-},{
+  },
+  {
     "id": 10,
     "bookName": "نگاهی به تاریخ ایران",
     "bookCount": null,
@@ -130,7 +140,8 @@
     "publishYear": 1392,
     "price": 14500,
     "content": "از عهد باستان تا انقراض سلسه پهلوی"
-}, {
+  },
+  {
     "id": 11,
     "bookName": "بابک خرم دین",
     "bookCount": null,
@@ -142,7 +153,8 @@
     "publishYear": 1397,
     "price": 22000,
     "content": "سردار غرور آفرین ایرانی"
-}, {
+  },
+  {
     "id": 12,
     "bookName": "زندگی دوازده امام",
     "bookCount": 2,
@@ -154,7 +166,8 @@
     "publishYear": 1391,
     "price": 15000,
     "content": null
-}, {
+  },
+  {
     "id": 13,
     "bookName": "راسپوتین",
     "bookCount": null,
@@ -166,7 +179,8 @@
     "publishYear": 1395,
     "price": 55000,
     "content": null
-}, {
+  },
+  {
     "id": 14,
     "bookName": "صد سال تنهایی",
     "bookCount": null,
@@ -178,7 +192,8 @@
     "publishYear": 1385,
     "price": 50000,
     "content": null
-}, {
+  },
+  {
     "id": 15,
     "bookName": "پرندگان خارزار",
     "bookCount": null,
@@ -190,7 +205,8 @@
     "publishYear": 1395,
     "price": 37500,
     "content": null
-}, {
+  },
+  {
     "id": 16,
     "bookName": "عقاید یک دلقک",
     "bookCount": null,
@@ -202,7 +218,8 @@
     "publishYear": 1396,
     "price": 30000,
     "content": null
-}, {
+  },
+  {
     "id": 17,
     "bookName": "کوری",
     "bookCount": null,
@@ -214,7 +231,8 @@
     "publishYear": 1388,
     "price": 0,
     "content": "برنده جایزه نوبل ادبی سال 1998"
-}, {
+  },
+  {
     "id": 18,
     "bookName": "خود مقدس شما",
     "bookCount": null,
@@ -226,7 +244,8 @@
     "publishYear": 1391,
     "price": 16900,
     "content": "راز نگرش به درون"
-}, {
+  },
+  {
     "id": 19,
     "bookName": "مدیریت عمومی",
     "bookCount": null,
@@ -238,7 +257,8 @@
     "publishYear": 1385,
     "price": 2000,
     "content": "ویراست دوم - دانشگاه علامه طباطبائی"
-}, {
+  },
+  {
     "id": 20,
     "bookName": "زبان بدن",
     "bookCount": null,
@@ -250,7 +270,8 @@
     "publishYear": 1395,
     "price": 13000,
     "content": null
-}, {
+  },
+  {
     "id": 21,
     "bookName": "زبان بدن",
     "bookCount": null,
@@ -262,7 +283,8 @@
     "publishYear": 1395,
     "price": 10000,
     "content": "دستبابی به افکار دیگران از طریق تعبیر حرکات بدن"
-}, {
+  },
+  {
     "id": 22,
     "bookName": "هوش اجتماعی",
     "bookCount": null,
@@ -274,7 +296,8 @@
     "publishYear": 1391,
     "price": 0,
     "content": "علم جدید"
-}, {
+  },
+  {
     "id": 23,
     "bookName": "هوش عاطفی",
     "bookCount": null,
@@ -286,7 +309,8 @@
     "publishYear": 1390,
     "price": 9000,
     "content": null
-}, {
+  },
+  {
     "id": 24,
     "bookName": "زندگی پر ماجرای محمد رضا شاه پهلوی",
     "bookCount": null,
@@ -298,9 +322,10 @@
     "publishYear": 94,
     "price": 2000,
     "content": null
-}, {
+  },
+  {
     "id": 25,
-    "bookName": "فتوشاپ 7\/01",
+    "bookName": "فتوشاپ 7/01",
     "bookCount": null,
     "author": "شباهنگ مسعود",
     "translator": null,
@@ -310,7 +335,8 @@
     "publishYear": 1382,
     "price": 5950,
     "content": null
-}, {
+  },
+  {
     "id": 26,
     "bookName": "موفقیت ",
     "bookCount": null,
@@ -322,7 +348,8 @@
     "publishYear": 1375,
     "price": 300,
     "content": "(30 درس برای موفقیت)"
-}, {
+  },
+  {
     "id": 27,
     "bookName": "قدرت فکر",
     "bookCount": null,
@@ -334,7 +361,8 @@
     "publishYear": 1390,
     "price": 6000,
     "content": null
-}, {
+  },
+  {
     "id": 28,
     "bookName": "روانشناسی خجالت",
     "bookCount": null,
@@ -346,7 +374,8 @@
     "publishYear": 1391,
     "price": 125,
     "content": null
-}, {
+  },
+  {
     "id": 29,
     "bookName": "روانشناسی شوخ طبعی ",
     "bookCount": null,
@@ -358,7 +387,8 @@
     "publishYear": 1387,
     "price": 2800,
     "content": "خلاقیت سلامت روان"
-}, {
+  },
+  {
     "id": 30,
     "bookName": "هدف یابی",
     "bookCount": null,
@@ -370,7 +400,8 @@
     "publishYear": 1388,
     "price": 2800,
     "content": null
-}, {
+  },
+  {
     "id": 31,
     "bookName": "تافته های جدا بافته",
     "bookCount": null,
@@ -382,7 +413,8 @@
     "publishYear": 1389,
     "price": 5900,
     "content": "زندگینامه"
-}, {
+  },
+  {
     "id": 32,
     "bookName": "آن بیست و سه نفر",
     "bookCount": null,
@@ -394,7 +426,8 @@
     "publishYear": 1394,
     "price": 15000,
     "content": "خاطرات جنگ"
-}, {
+  },
+  {
     "id": 33,
     "bookName": "365  Stories and Rhymes for boys",
     "bookCount": null,
@@ -406,7 +439,8 @@
     "publishYear": null,
     "price": 50000,
     "content": "A Story a Day                          داستان"
-}, {
+  },
+  {
     "id": 34,
     "bookName": "اثر مرکب",
     "bookCount": null,
@@ -418,19 +452,7 @@
     "publishYear": 1396,
     "price": 21900,
     "content": "ایحاد تحولی شگفت انگیز در زندگی درآمد و موفقیت شما "
-}, {
-    "id": 0,
-    "bookName": "اثر مرکب",
-    "bookCount": null,
-    "author": "هاردی دارن",
-    "translator": "بیات شاهین",
-    "bookType": "روانشناسی",
-    "publishers": "نسل نو اندیش",
-    "publishCount": "یازدهم",
-    "publishYear": 1396,
-    "price": 0,
-    "content": "ایحاد تحولی شگفت انگیز در زندگی درآمد و موفقیت شما "
-}, {
+  }, {
     "id": 35,
     "bookName": "مردی به نام اوه",
     "bookCount": null,
@@ -442,7 +464,8 @@
     "publishYear": 1395,
     "price": 25000,
     "content": null
-}, {
+  },
+  {
     "id": 36,
     "bookName": "129داستان کوتاه انگلیسی",
     "bookCount": null,
@@ -454,7 +477,8 @@
     "publishYear": 1397,
     "price": 25000,
     "content": null
-}, {
+  },
+  {
     "id": 37,
     "bookName": "هرگز فراموش نشوید",
     "bookCount": null,
@@ -466,7 +490,8 @@
     "publishYear": 1396,
     "price": 28900,
     "content": "جگونه فردی شوید که همه به یاد بیاورند و کسی توانایی مخالفت با شما را نداشته باشد"
-}, {
+  },
+  {
     "id": 38,
     "bookName": "شب نیست",
     "bookCount": null,
@@ -478,7 +503,8 @@
     "publishYear": 1397,
     "price": 9300,
     "content": null
-}, {
+  },
+  {
     "id": 39,
     "bookName": "ببار بارون",
     "bookCount": null,
@@ -490,7 +516,8 @@
     "publishYear": 1397,
     "price": 69000,
     "content": null
-}, {
+  },
+  {
     "id": 40,
     "bookName": "آخرین نامه معشوق",
     "bookCount": null,
@@ -502,7 +529,8 @@
     "publishYear": 1397,
     "price": 54000,
     "content": null
-}, {
+  },
+  {
     "id": 41,
     "bookName": "تاریخ دانشنامه",
     "bookCount": null,
@@ -514,7 +542,8 @@
     "publishYear": 1397,
     "price": 65000,
     "content": "کتاب مرجع تاریخ ---گنج دانش"
-}, {
+  },
+  {
     "id": 42,
     "bookName": "تاریخ و سیاست دانشنامه",
     "bookCount": null,
@@ -526,7 +555,8 @@
     "publishYear": 1398,
     "price": 53000,
     "content": "کتاب مرجع ---دانشنامه مدرسه تاریخ وسیاست ----گنج دانش"
-}, {
+  },
+  {
     "id": 43,
     "bookName": "10راز موفقیت و آرامش درونی",
     "bookCount": null,
@@ -538,7 +568,8 @@
     "publishYear": 1398,
     "price": 16000,
     "content": null
-}, {
+  },
+  {
     "id": 44,
     "bookName": "در سوم",
     "bookCount": null,
@@ -550,7 +581,8 @@
     "publishYear": 1399,
     "price": 73000,
     "content": "کشف راز موفق ترین افراد دنیا"
-}, {
+  },
+  {
     "id": 45,
     "bookName": "قانون توانگری",
     "bookCount": null,
@@ -562,7 +594,8 @@
     "publishYear": 1399,
     "price": 65000,
     "content": "راهکارهایی قدرتمند برای رسیدن به توانگری خلق بهترین لحظات به کمک اندیشه توانگرانه"
-}, {
+  },
+  {
     "id": 46,
     "bookName": "راز جذب پول در ایران1",
     "bookCount": null,
@@ -574,7 +607,8 @@
     "publishYear": 1398,
     "price": 34000,
     "content": null
-}, {
+  },
+  {
     "id": 47,
     "bookName": "انگلیسی در سفر1",
     "bookCount": null,
@@ -586,7 +620,8 @@
     "publishYear": 1399,
     "price": 70000,
     "content": "  مبتدی  English on Trip"
-}, {
+  },
+  {
     "id": 48,
     "bookName": "انگلیسی در سفر2",
     "bookCount": null,
@@ -598,7 +633,8 @@
     "publishYear": 1393,
     "price": 70000,
     "content": "متوسطه و پیشرفته  English on Trip Plus"
-}, {
+  },
+  {
     "id": 49,
     "bookName": "اماکن تاریخی مذهبی استان فارس و گسترش گردشگری مذهبی",
     "bookCount": null,
@@ -610,7 +646,8 @@
     "publishYear": 1389,
     "price": 5800,
     "content": null
-}, {
+  },
+  {
     "id": 50,
     "bookName": "هند دیار آشنا",
     "bookCount": null,
@@ -622,7 +659,8 @@
     "publishYear": 1391,
     "price": 16000,
     "content": "سیر و سیاحت آثار تاریخی"
-}, {
+  },
+  {
     "id": 51,
     "bookName": "آشنایی با رشته های مختلف هنری",
     "bookCount": null,
@@ -634,7 +672,8 @@
     "publishYear": 1389,
     "price": 500,
     "content": "دوره پیش دانشگاهی رشته هنر"
-}, {
+  },
+  {
     "id": 52,
     "bookName": "48قانون قدرت",
     "bookCount": null,
@@ -646,7 +685,8 @@
     "publishYear": 1399,
     "price": 120000,
     "content": null
-}, {
+  },
+  {
     "id": 53,
     "bookName": "آموزش جامع ان ال پی",
     "bookCount": null,
@@ -658,7 +698,8 @@
     "publishYear": 1398,
     "price": 27900,
     "content": "چگونه زندگی موفقی بسازیم"
-}, {
+  },
+  {
     "id": 54,
     "bookName": "عاشق خودت باش",
     "bookCount": null,
@@ -670,7 +711,8 @@
     "publishYear": 1398,
     "price": 39900,
     "content": "اثری شگفت انگیز برای پایان دادن به وسواس منفی نسبت به ظاهر و آغاز زندگی توام با شادی و اعتماد به نفس"
-}, {
+  },
+  {
     "id": 55,
     "bookName": "قدرت امید",
     "bookCount": null,
@@ -682,7 +724,8 @@
     "publishYear": 1398,
     "price": 43000,
     "content": null
-}, {
+  },
+  {
     "id": 56,
     "bookName": "نترس باش",
     "bookCount": null,
@@ -694,7 +737,8 @@
     "publishYear": 1401,
     "price": 99000,
     "content": "سری کتابهای حوزه توسعه فردی"
-}, {
+  },
+  {
     "id": 57,
     "bookName": "تمرکز حواس",
     "bookCount": null,
@@ -706,8 +750,8 @@
     "publishYear": 1401,
     "price": 127000,
     "content": "سری کتابهای حوزه توسعه فردی"
-},
-{
+  },
+  {
     "id": 58,
     "bookName": "تاریخ ایران",
     "bookCount": null,
@@ -719,7 +763,8 @@
     "publishYear": 1395,
     "price": 0,
     "content": "   حسن پیرنیا - عباس اقبال آشتیانی - علی اصغر طاهری"
-}, {
+  },
+  {
     "id": 59,
     "bookName": "تاریخ ایران",
     "bookCount": null,
@@ -731,4 +776,5 @@
     "publishYear": 1395,
     "price": 0,
     "content": "   حسن پیرنیا - عباس اقبال آشتیانی - علی اصغر طاهری"
-}]
+  }
+]
