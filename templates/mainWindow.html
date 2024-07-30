@@ -94,7 +94,7 @@
                                     <div class="card-author">
                                         <div class="row">
                                             <div class="col-md-6 text-white" style="text-align: right;">
-                                                <h1 class="yekanExBold" style="font-size:3rem;">0</h1>
+                                                <h1 class="yekanExBold" id="author_counter" style="font-size:3rem;"></h1>
                                                 <p class="">نویسندگان</p>
                                             </div>
                                             <div class="col-md-6">
@@ -229,8 +229,9 @@
                     </div>
                     <!-- ! show books Tab -->
                     <div class="tabcontent mt-4" id="booksTab">
-                        <div class="book-title mb-4">
+                        <div class="book-title mb-4 d-flex gap-2 align-items-center">
                             <h2 class="yekanExBold">همه کتاب ها</h2>
+                            <img src="../assets//images/fe--question.svg" style="width: 40px;" alt="">
                         </div>
                         <hr>
                         <div class="search-books-div">
@@ -369,21 +370,21 @@
                                 <div class="col-md-5"></div>
                             </div>
                         </div>
-                        <!-- <div class="books-table">
-                            <table class="table table-hover table-bordered table-striped">
-                                <thead>
-                                    <tr id="bookHeader"></tr>
-                                </thead>
-                                <tbody id="bookBody"></tbody>
-                            </table>
-                        </div> -->
 
                         <div id="all-books">
-                            <button id="load-books">Load All Books</button>
                             <div class="books-table">
                                 <table class="table table-hover table-bordered table-striped">
                                     <thead>
-                                        <tr id="bookHeader"></tr>
+                                        <tr>
+                                            <th>ردیف</th>
+                                            <th>نام کتاب</th>
+                                            <th>نویسنده</th>
+                                            <th>مترجم</th>
+                                            <th>نوع کتاب</th>
+                                            <th>انتشارات</th>
+                                            <th>قیمت</th>
+                                            <th>ویرایش</th>
+                                        </tr>
                                     </thead>
                                     <tbody id="bookBody"></tbody>
                                 </table>

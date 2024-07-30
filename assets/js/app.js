@@ -116,37 +116,92 @@ updateMehrFileCount();
 
 //! application database
 // Load all books
-ipcRenderer.send('show-all-books');
+ipcRenderer.send('show-all-books-dashboard');
+
+// get author count
+ipcRenderer.send('get-distinct-authors');
+
 
 ipcRenderer.on('show-all-books-reply', (event, response) => {
     if (response.success) {
         const books = response.books;
-        const bookHeader = document.getElementById('bookHeader');
         const bookBody = document.getElementById('bookBody');
 
         // Clear existing content
-        bookHeader.innerHTML = '';
         bookBody.innerHTML = '';
 
         // Set table headers
         const headers = Object.keys(books[0]);
-        headers.forEach(header => {
-            const th = document.createElement('th');
-            th.textContent = header;
-            bookHeader.appendChild(th);
-        });
+
+        // Show the book count in the database
+        document.getElementById("book_counter").innerHTML = books.length;
 
         // Populate table rows
         books.forEach(book => {
             const tr = document.createElement('tr');
+
+            // Add data cells
             headers.forEach(header => {
                 const td = document.createElement('td');
                 td.textContent = book[header];
                 tr.appendChild(td);
             });
+
+            // Add edit and delete buttons with images and Bootstrap classes
+            const td = document.createElement('td');
+            td.className = 'd-flex';
+            td.style.gap = '5px'
+
+            const editButton = document.createElement('button');
+            editButton.className = 'btn btn-secondary btn-sm'; // Bootstrap classes
+            editButton.onclick = () => handleEdit(book); // Define a function to handle edit
+            const editIcon = document.createElement('img');
+            editIcon.src = '../assets/images/ri--more-fill.svg'; // Path to your edit icon image
+            editIcon.alt = 'Edit';
+            editButton.appendChild(editIcon);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'btn btn-primary btn-sm'; // Bootstrap classes
+            deleteButton.onclick = () => handleDelete(book); // Define a function to handle delete
+            const deleteIcon = document.createElement('img');
+            deleteIcon.src = '../assets/images/iconamoon--edit-duotone.svg'; // Path to your delete icon image
+            deleteIcon.alt = 'Delete';
+            deleteButton.appendChild(deleteIcon);
+
+            td.appendChild(editButton);
+            td.appendChild(deleteButton);
+            tr.appendChild(td);
+
             bookBody.appendChild(tr);
         });
+
     } else {
         console.error('Failed to load books:', response.message);
+    }
+});
+
+// Define the handleEdit function
+function handleEdit(book) {
+    console.log('Edit button clicked for book:', book);
+    // Add your logic to handle the edit action here
+}
+
+// Define the handleDelete function
+function handleDelete(book) {
+    console.log('Delete button clicked for book:', book);
+    // Add your logic to handle the delete action here
+}
+
+
+
+ipcRenderer.on('get-distinct-authors-reply', (event, response) => {
+    if (response.success) {
+        const authors = response.authors;
+        const authorCount = authors.length;
+
+        // Show the author count in the database
+        document.getElementById('author_counter').innerHTML = authorCount;
+    } else {
+        console.error('Failed to load distinct authors:', response.message);
     }
 });

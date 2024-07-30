@@ -209,3 +209,29 @@ header {
     width: 20px;
     margin-right: 8px;
 }
+
+.books-table {
+    height: 450px;
+    overflow-y: auto;
+}
+
+.books-table::-webkit-scrollbar {
+    width: 12px;
+}
+
+.books-table::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+.books-table::-webkit-scrollbar-thumb {
+    background-color: #f39c12;
+    border-radius: 20px;
+    /* creates padding around scroll thumb */
+}
+
+.books-table thead{
+    position: sticky;
+    top: -1px;
+    z-index: 1;
+    background-color: #fffefe;
+}

@@ -173,8 +173,6 @@ ipcMain.on('save-text-file', (event, textToSave) => {
                 fs.writeFile(filePath, textToSave, 'utf-8', (err) => {
                     if (err) {
                         console.error('Error saving file:', err);
-                    } else {
-                        console.log('File saved successfully!');
                     }
                 });
             }
@@ -256,6 +254,7 @@ ipcMain.on('count-mehr-files', (event) => {
 
 
 //? database Part
+// show all items in the database items
 function showAllBooks(event) {
     const query = 'SELECT * FROM books';
     db.all(query, [], (err, rows) => {
@@ -273,10 +272,48 @@ function showAllBooks(event) {
     });
 }
 
+// show books in dashboard
+function showAllBooksDashboard(event) {
+    const query = 'SELECT id, bookName, author, translator, bookType, publishers, price FROM books';
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            event.reply('show-all-books-reply', {
+                success: false,
+                message: err.message
+            });
+        } else {
+            event.reply('show-all-books-reply', {
+                success: true,
+                books: rows
+            });
+        }
+    });
+}
+
+
+// Function to get distinct authors
+function getDistinctAuthors(event) {
+    const query = 'SELECT DISTINCT author FROM books';
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            event.reply('get-distinct-authors-reply', {
+                success: false,
+                message: err.message
+            });
+        } else {
+            event.reply('get-distinct-authors-reply', {
+                success: true,
+                authors: rows
+            });
+        }
+    });
+}
+
+// add books
 function addBook(event, bookData) {
     const query = `
-        INSERT INTO books (bookName, bookCount, author, translator, bookType, publishers, publishCount, publishYear, price, content, colsbanner)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO books (bookName, bookCount, author, translator, bookType, publishers, publishCount, publishYear, price, content, banner, isLike, isSave)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
     const params = [
         bookData.bookName, bookData.bookCount, bookData.author, bookData.translator, bookData.bookType,
@@ -297,8 +334,10 @@ function addBook(event, bookData) {
     });
 }
 
+
 // Event listeners for the renderer process
-ipcMain.on('show-all-books', (event) => showAllBooks(event));
+ipcMain.on('show-all-books-dashboard', (event) => showAllBooksDashboard(event));
+ipcMain.on('get-distinct-authors', (event) => getDistinctAuthors(event));
 ipcMain.on('add-book', (event, bookData) => addBook(event, bookData));
 
 // close database before exit
