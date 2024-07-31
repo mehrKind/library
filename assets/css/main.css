@@ -57,6 +57,11 @@
     box-sizing: border-box;
 }
 
+*::selection{
+    background-color: #ffbe54;
+    color: #212529;
+}
+
 body {
     background: #f1f1f1;
     font-family: yekanMed;
@@ -234,4 +239,23 @@ header {
     top: -1px;
     z-index: 1;
     background-color: #fffefe;
+}
+
+.hlpBx{
+    background: #fff;
+    border-radius: 8px;
+    width: 350px;
+    height: 180px;
+    padding: 10px;
+    transition: all .3s ease-in-out;
+}
+
+.bookContentDetail p{
+    font-family: yekanExBold;
+    color: #212529;
+}
+
+.bookContentDetail span{
+    font-family: yekanMed;
+    color: #757575;
 }

@@ -121,7 +121,6 @@ ipcRenderer.send('show-all-books-dashboard');
 // get author count
 ipcRenderer.send('get-distinct-authors');
 
-
 ipcRenderer.on('show-all-books-reply', (event, response) => {
     if (response.success) {
         const books = response.books;
@@ -131,7 +130,7 @@ ipcRenderer.on('show-all-books-reply', (event, response) => {
         bookBody.innerHTML = '';
 
         // Set table headers
-        const headers = Object.keys(books[0]);
+        const headers = ['id', 'bookName', 'author', 'translator', 'bookType', 'publishers', 'price', 'actions'];
 
         // Show the book count in the database
         document.getElementById("book_counter").innerHTML = books.length;
@@ -142,34 +141,38 @@ ipcRenderer.on('show-all-books-reply', (event, response) => {
 
             // Add data cells
             headers.forEach(header => {
-                const td = document.createElement('td');
-                td.textContent = book[header];
-                tr.appendChild(td);
+                if (header !== 'actions') {
+                    const td = document.createElement('td');
+                    td.textContent = book[header];
+                    tr.appendChild(td);
+                }
             });
 
-            // Add edit and delete buttons with images and Bootstrap classes
+            // Add edit and detail buttons with images and Bootstrap classes
             const td = document.createElement('td');
             td.className = 'd-flex';
-            td.style.gap = '5px'
+            td.style.gap = '5px';
 
             const editButton = document.createElement('button');
-            editButton.className = 'btn btn-secondary btn-sm'; // Bootstrap classes
-            editButton.onclick = () => handleEdit(book); // Define a function to handle edit
+            editButton.className = 'btn btn-primary btn-sm';
+            editButton.onclick = () => handleEdit(book);
             const editIcon = document.createElement('img');
-            editIcon.src = '../assets/images/ri--more-fill.svg'; // Path to your edit icon image
+            editIcon.src = '../assets/images/iconamoon--edit-duotone.svg';
             editIcon.alt = 'Edit';
             editButton.appendChild(editIcon);
 
-            const deleteButton = document.createElement('button');
-            deleteButton.className = 'btn btn-primary btn-sm'; // Bootstrap classes
-            deleteButton.onclick = () => handleDelete(book); // Define a function to handle delete
-            const deleteIcon = document.createElement('img');
-            deleteIcon.src = '../assets/images/iconamoon--edit-duotone.svg'; // Path to your delete icon image
-            deleteIcon.alt = 'Delete';
-            deleteButton.appendChild(deleteIcon);
+            const detailButton = document.createElement('button');
+            detailButton.className = 'btn btn-secondary btn-sm';
+            detailButton.onclick = () => handleDetail(book.id);
+            const detailIcon = document.createElement('img');
+            detailIcon.src = '../assets/images/ri--more-fill.svg';
+            detailIcon.alt = 'Details';
+            detailButton.appendChild(detailIcon);
+            detailButton.setAttribute('data-bs-toggle', 'modal');
+            detailButton.setAttribute('data-bs-target', '#bookDetailModal');
 
             td.appendChild(editButton);
-            td.appendChild(deleteButton);
+            td.appendChild(detailButton);
             tr.appendChild(td);
 
             bookBody.appendChild(tr);
@@ -180,17 +183,45 @@ ipcRenderer.on('show-all-books-reply', (event, response) => {
     }
 });
 
-// Define the handleEdit function
 function handleEdit(book) {
     console.log('Edit button clicked for book:', book);
     // Add your logic to handle the edit action here
 }
 
-// Define the handleDelete function
-function handleDelete(book) {
-    console.log('Delete button clicked for book:', book);
-    // Add your logic to handle the delete action here
+function handleDetail(bookId) {
+    ipcRenderer.send('get-book-details', bookId);
 }
+
+ipcRenderer.on('get-book-details-reply', (event, response) => {
+    if (response.success) {
+        const book = response.book;
+        document.querySelector('#bookDetailModal .modal-body').innerHTML = `
+            <div class="row">
+                <div class="col-md-5 text-center">
+                    <div class="bookImg">
+                        <img src=${book.banner ? book.banner : "../assets/images/book-default-cover.jpg"} alt="book image" style="width: 250px; height: 100%;">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="bookContentDetail">
+                        <p>نام کتاب: <span>${book.bookName}</span></p>
+                        <p>نویسنده: <span>${book.author}</span></p>
+                        <p>مترجم: <span>${book.translator ? book.translator : 'مشخص نیست'}</span></p>
+                        <p>نوع کتاب: <span>${book.bookType}</span></p>
+                        <p>ناشر: <span>${book.publishers}</span></p>
+                        <p>قیمت: <span>${book.price}</span></p>
+                        <p>توضیحات: <span>${book.content ? book.content : 'ندارد'}</span></p>
+                        <p>تعداد کتاب: <span>${book.bookCount ? bookCount : 1}</span></p>
+                        <p>لایک شده: <span>${book.isLike ? 'بله' : 'خیر'}</span></p>
+                        <p>ذخیره شده: <span>${book.isSave ? 'بله' : 'خیر'}</span></p>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else {
+        console.error('Failed to load book details:', response.message);
+    }
+});
 
 
 

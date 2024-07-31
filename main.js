@@ -272,6 +272,27 @@ function showAllBooks(event) {
     });
 }
 
+// book detail
+function getBookDetails(event, bookId) {
+    const query = 'SELECT * FROM books WHERE id = ?';
+    db.get(query, [bookId], (err, row) => {
+        if (err) {
+            event.reply('get-book-details-reply', {
+                success: false,
+                message: err.message
+            });
+        } else {
+            event.reply('get-book-details-reply', {
+                success: true,
+                book: row
+            });
+        }
+    });
+}
+
+
+
+
 // show books in dashboard
 function showAllBooksDashboard(event) {
     const query = 'SELECT id, bookName, author, translator, bookType, publishers, price FROM books';
@@ -338,6 +359,7 @@ function addBook(event, bookData) {
 // Event listeners for the renderer process
 ipcMain.on('show-all-books-dashboard', (event) => showAllBooksDashboard(event));
 ipcMain.on('get-distinct-authors', (event) => getDistinctAuthors(event));
+ipcMain.on('get-book-details', (event, bookId) => getBookDetails(event, bookId));
 ipcMain.on('add-book', (event, bookData) => addBook(event, bookData));
 
 // close database before exit
