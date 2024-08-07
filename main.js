@@ -9,7 +9,8 @@ const {
     BrowserWindow,
     Notification,
     ipcMain,
-    dialog
+    dialog,
+    shell
 } = electron;
 let db = new sqlite3.Database('database.db');
 
@@ -252,6 +253,15 @@ ipcMain.on('count-mehr-files', (event) => {
     });
 });
 
+// open folder with path to open article
+function openFolder(path){
+    shell.openPath(path).then((error)=>{
+        if (error){
+            console.log("fail to open folder: ", error)
+        }
+    })
+}
+
 
 //? database Part
 // show all items in the database items
@@ -330,6 +340,24 @@ function getDistinctAuthors(event) {
     });
 }
 
+// Function to get articles path
+function AllArticles(event) {
+    const query = 'SELECT * FROM articles';
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            event.reply('get-all-articles-reply', {
+                success: false,
+                message: err.message
+            });
+        } else {
+            event.reply('get-all-articles-reply', {
+                success: true,
+                articles: rows
+            });
+        }
+    });
+}
+
 // add books
 function addBook(event, bookData) {
     const query = `
@@ -361,6 +389,9 @@ ipcMain.on('show-all-books-dashboard', (event) => showAllBooksDashboard(event));
 ipcMain.on('get-distinct-authors', (event) => getDistinctAuthors(event));
 ipcMain.on('get-book-details', (event, bookId) => getBookDetails(event, bookId));
 ipcMain.on('add-book', (event, bookData) => addBook(event, bookData));
+ipcMain.on('AllArticles', (event) => AllArticles(event));
+// open article file with path
+ipcMain.on("openArticleFolder", (event, folderPath) => openFolder(folderPath));
 
 // close database before exit
 app.on('before-quit', () => {

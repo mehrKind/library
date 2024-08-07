@@ -113,6 +113,48 @@ document.getElementById('dashboardID').addEventListener('click', updateMehrFileC
 // Initial count on page load
 updateMehrFileCount();
 
+// search in the table
+function SearchTable() {
+    var input, filter, table, tr, td, i, txtValue, SearchFor;
+    input = document.getElementById("search_input");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("table_books");
+    tr = table.getElementsByTagName("tr");
+    SearchFor = document.getElementById("inputState").value;
+
+    // Determine the index of the selected search criterion
+    var searchIndex;
+    switch (SearchFor) {
+        case "نام کتاب":
+            searchIndex = 1; // Assuming the book name is in the first column
+            break;
+        case "نویسنده":
+            searchIndex = 2; // Assuming the author is in the second column
+            break;
+        case "ناشر":
+            searchIndex = 5; // Assuming the publisher is in the third column
+            break;
+        case "نوع کتاب":
+            searchIndex = 4; // Assuming the type is in the fourth column
+            break;
+        default:
+            searchIndex = 1; // Invalid selection
+    }
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[searchIndex];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+
 
 //! application database
 // Load all books
@@ -120,6 +162,9 @@ ipcRenderer.send('show-all-books-dashboard');
 
 // get author count
 ipcRenderer.send('get-distinct-authors');
+// In your renderer process
+ipcRenderer.send('AllArticles');
+
 
 ipcRenderer.on('show-all-books-reply', (event, response) => {
     if (response.success) {
@@ -236,3 +281,48 @@ ipcRenderer.on('get-distinct-authors-reply', (event, response) => {
         console.error('Failed to load distinct authors:', response.message);
     }
 });
+
+
+ipcRenderer.on('get-all-articles-reply', (event, response) => {
+    if (response.success) {
+        const articles = response.articles;
+        const articleBody = document.getElementById("articleBody");
+    
+        const headers = ['id', 'name', 'path', "actions"];
+    
+        articles.forEach(article => {
+            const tr = document.createElement('tr');
+    
+            // Add data cells
+            headers.forEach(header => {
+                if (header !== 'actions') {
+                    const td = document.createElement('td');
+                    td.textContent = article[header]; // Corrected to access the current article
+                    tr.appendChild(td);
+                }
+            });
+    
+            // Add edit and detail buttons with images and Bootstrap classes
+            const td = document.createElement('td');
+            td.className = 'd-flex';
+            td.style.gap = '5px';
+    
+            const openBtn = document.createElement('button');
+            openBtn.className = 'btn btn-danger btn-sm';
+            openBtn.onclick = () => handleOpenArticle(article.path); // Ensure handleDetail is defined
+            openBtn.textContent = "باز کردن";
+
+    
+            td.appendChild(openBtn);
+            tr.appendChild(td);
+    
+            articleBody.appendChild(tr);
+        });    
+    } else {
+        console.error('Failed to load book details:', response.message);
+    }
+});
+
+function handleOpenArticle(folderPath){
+    ipcRenderer.send("openArticleFolder", folderPath)
+}
