@@ -254,9 +254,9 @@ ipcMain.on('count-mehr-files', (event) => {
 });
 
 // open folder with path to open article
-function openFolder(path){
-    shell.openPath(path).then((error)=>{
-        if (error){
+function openFolder(path) {
+    shell.openPath(path).then((error) => {
+        if (error) {
             console.log("fail to open folder: ", error)
         }
     })
@@ -383,6 +383,28 @@ function addBook(event, bookData) {
     });
 }
 
+// add articles to database
+function addArticles(event, articleData) {
+    const query = `
+        INSERT INTO articles (name, path) VALUES (?,?,?)
+    `;
+    const params = [
+        articleData.name, articleData.path
+    ];
+    db.run(query, params, function (err) {
+        if (err) {
+            event.reply('add-article-reply', {
+                success: false,
+                message: err.message
+            });
+        } else {
+            event.reply('add-article-reply', {
+                success: true,
+                articleId: this.lastID
+            });
+        }
+    });
+}
 
 // Event listeners for the renderer process
 ipcMain.on('show-all-books-dashboard', (event) => showAllBooksDashboard(event));

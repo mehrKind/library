@@ -34,6 +34,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const todayDashboard = document.getElementById("todayDashboard");
 
+// if the user not was online show the not connected internet
+function updateConnectionStatus() {
+    const onlineDiv = document.getElementById('connected-global');
+    const offlineDiv = document.getElementById('notConnected-globalId');
+
+    if (navigator.onLine) {
+        onlineDiv.style.display = 'block';
+        offlineDiv.style.display = 'none';
+        // Optionally, you can make a request to a URL here to check connectivity
+    } else {
+        onlineDiv.style.display = 'none';
+        offlineDiv.style.display = 'flex';
+    }
+}
+
+// Initial check
+updateConnectionStatus();
+
+// Event listeners for online and offline events
+window.addEventListener('online', updateConnectionStatus);
+window.addEventListener('offline', updateConnectionStatus);
+
 let options = {
     year: 'numeric',
     month: 'long',
@@ -154,6 +176,33 @@ function SearchTable() {
     }
 }
 
+// search for articles in the table
+function SearchArticlesTable() {
+    var input, filter, table, tr, td, i, j, txtValue;
+    input = document.getElementById("article-search-input");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("table_articles");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows (except the first one, which is usually the header)
+    for (i = 1; i < tr.length; i++) {
+        tr[i].style.display = "none"; // Hide the row by default
+        td = tr[i].getElementsByTagName("td");
+        
+        // Loop through all cells in the row
+        for (j = 0; j < td.length; j++) {
+            if (td[j]) {
+                txtValue = td[j].textContent || td[j].innerText;
+                // Check if the cell contains the filter text
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = ""; // Show the row if a match is found
+                    break; // No need to check other cells in this row
+                }
+            }
+        }
+    }
+}
+
 
 
 //! application database
@@ -237,6 +286,7 @@ function handleDetail(bookId) {
     ipcRenderer.send('get-book-details', bookId);
 }
 
+// create & show books from database into a table
 ipcRenderer.on('get-book-details-reply', (event, response) => {
     if (response.success) {
         const book = response.book;
@@ -269,7 +319,7 @@ ipcRenderer.on('get-book-details-reply', (event, response) => {
 });
 
 
-
+// get the authors from database
 ipcRenderer.on('get-distinct-authors-reply', (event, response) => {
     if (response.success) {
         const authors = response.authors;
@@ -282,7 +332,7 @@ ipcRenderer.on('get-distinct-authors-reply', (event, response) => {
     }
 });
 
-
+// show data from database (articles table)
 ipcRenderer.on('get-all-articles-reply', (event, response) => {
     if (response.success) {
         const articles = response.articles;
@@ -308,7 +358,7 @@ ipcRenderer.on('get-all-articles-reply', (event, response) => {
             td.style.gap = '5px';
     
             const openBtn = document.createElement('button');
-            openBtn.className = 'btn btn-danger btn-sm';
+            openBtn.className = 'btn btn-secondary btn-sm';
             openBtn.onclick = () => handleOpenArticle(article.path); // Ensure handleDetail is defined
             openBtn.textContent = "باز کردن";
 
@@ -318,6 +368,7 @@ ipcRenderer.on('get-all-articles-reply', (event, response) => {
     
             articleBody.appendChild(tr);
         });    
+        document.getElementById("articleCourseId").innerHTML = articles.length
     } else {
         console.error('Failed to load book details:', response.message);
     }

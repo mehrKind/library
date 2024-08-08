@@ -49,8 +49,8 @@
                             <p>نوشته ها</p>
                         </li>
                         <li class="tablinks" onclick="openTab(event, 'courseTab')">
-                            <img src="../assets/images/fluent--hat-graduation-20-filled.svg" alt="">
-                            <p>دوره ها</p>
+                            <img src="../assets/images/material-symbols--explore.svg" alt="">
+                            <p>عمومی</p>
                         </li>
                         <li class="tablinks" onclick="openTab(event, 'likeTab')">
                             <img src="../assets/images/subway--like.svg" alt="">
@@ -142,8 +142,8 @@
                                     <div class="card-article">
                                         <div class="row">
                                             <div class="col-md-6 text-white" style="text-align: right;">
-                                                <h1 class="yekanExBold" style="font-size:3rem;">0</h1>
-                                                <p class="">مقاله</p>
+                                                <h1 class="yekanExBold" style="font-size:3rem;" id="articleCourseId"></h1>
+                                                <p class="">دوره و مقالات</p>
                                             </div>
                                             <div class="col-md-6">
                                                 <img src="../assets/images/article-big.svg" alt="">
@@ -298,7 +298,7 @@
                                                     width="1.2em" height="1.2em" viewBox="0 0 24 24">
                                                     <path fill="#fff"
                                                         d="M6.012 18H21V4c0-1.103-.897-2-2-2H6c-1.206 0-3 .799-3 3v14c0 2.201 1.794 3 3 3h15v-2H6.012C5.55 19.988 5 19.806 5 19s.55-.988 1.012-1M8 9h3V6h2v3h3v2h-3v3h-2v-3H8z" />
-                                                    </svg> اضافه کردن </button>
+                                                </svg> اضافه کردن </button>
                                         </div>
                                         <!-- Modal Body -->
                                         <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
@@ -475,7 +475,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="search-article-input d-flex">
-                                            <input type="text" class="form-control" placeholder="جستجو کنید ...">
+                                            <input type="text" class="form-control" placeholder="جستجو کنید ..."
+                                                id="article-search-input" onkeydown="SearchArticlesTable()">
                                         </div>
                                     </div>
                                     <div class="col-md-5"></div>
@@ -489,7 +490,7 @@
                                             <div class="books-table">
                                                 <table
                                                     class="table table-hover table-bordered table-striped table-responsive"
-                                                    id="table_books">
+                                                    id="table_articles">
                                                     <thead>
                                                         <tr>
                                                             <th>ردیف</th>
@@ -502,8 +503,38 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <h5 class="yekanBold">اضافه کردن مقاله | دوره</h5>
+                                        <div class="col-md-3" style="border-right: 1px solid rgb(180, 180, 180);">
+                                            <div
+                                                class="add-article-header d-flex align-items-center mt-2 p-2 rounded-2">
+                                                <img src="../assets/images/ic--baseline-plus.svg" style="width: 34px;">
+                                                <h5 class="yekanBold">اضافه کردن مقاله | دوره</h5>
+                                            </div>
+                                            <div class="add-article-form">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label yekanBold">نام فایل:</label>
+                                                        <input type="text" class="form-control" placeholder="اینجا بنویسید ...">
+                                                    </div>
+                                                    <hr>
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label yekanBold"
+                                                            style="font-size: 17px;">آدرس: </label>
+                                                        <input type="file" class="form-control" name="" id=""
+                                                            placeholder="" aria-describedby="fileHelpId" />
+                                                    </div>
+                                                    <div class="add-aricles-buttons text-center">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <button type="button" class="btn btn-success w-100">اضافه کردن</button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button type="button" class="btn btn-danger w-100">حذف فایل</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -575,7 +606,39 @@
                     <!-- ! like Books -->
                     <div class="tabcontent" id="likeTab">likeTab</div>
                     <div class="tabcontent" id="bookmarkTab">bookmarkTab</div>
-                    <div class="tabcontent" id="courseTab">courseTab</div>
+                    <!-- ! course Part -->
+                    <div class="tabcontent" id="courseTab">
+                        <div id="notConnected-globalId" class="notConnected-global" style="width: 100%; height: 95vh; display: flex; justify-content: center; align-items: center; text-align: center;">
+                            <div>
+                                <img src="../assets/images/svg-spinners--wifi-fade.svg" class="mb-3" alt="" style="width:50px;">
+                                <h3 class="yekanExBold">دسترسی خود را به اینترنت  بررسی کنید</h3>
+                            </div>
+                        </div>
+                        <div id="connected-global">
+                            <div class="global-header container mt-4">
+                                <h3 class="yekanBold">کتاب های عمومی</h3>
+                            </div>
+                            <hr>
+                            <div class="global-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="book-img-global text-center bg-white">
+                                                <img src="../assets/images/book.jpg" class="w-50" alt="">
+                                            </div>
+                                            <div class="book-content-global mt-2">
+                                                <p class="" style="font-size: 15px; color: #3f4064;">کتاب مبانی میکرو الکترونیک ویراست دوم چاپ پنجم اثر بهزاد رضوی انتشارات نص</p>
+                                                <div class="global-rate d-flex align-items-center gap-1 justify-content-end">
+                                                    <p style="font-size: 12px; color: #222d32; margin: 0;">3.4</p>
+                                                    <img src="../assets/images/teenyicons--star-solid.svg" style="width: 15px;" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- ! about part -->
                     <div class="tabcontent" id="aboutTab">
                         <div class="container mt-4">
